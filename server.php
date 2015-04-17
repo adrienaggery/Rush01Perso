@@ -1,6 +1,9 @@
 <?php
 
 require 'vendor/autoload.php';
+require 'classes/Game.class.php';
+
+$games = array();
 
 function parseURI($request){
 	$requestarray = (array)$request;
@@ -15,10 +18,10 @@ function parseURI($request){
 $app = function ($request, $response) {
 
 	$uri = parseURI($request);
-	print_r($uri);
 
-    $response->writeHead(200, array('Content-Type' => 'text/plain'));
-    $response->end("Hello World\n");
+	if (!empty($uri[0]))
+		call_user_func($uri[0]);
+
 };
 
 $loop = React\EventLoop\Factory::create();
@@ -30,3 +33,14 @@ echo "Server running at http://127.0.0.1:1337\n";
 
 $socket->listen(1337);
 $loop->run();
+
+// Accessors
+
+function getGamesCount() { return count($games); }
+
+// API calls
+
+function creategame(){
+	$games[] = new Game();
+}
+
