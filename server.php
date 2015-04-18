@@ -2,6 +2,7 @@
 
 require_once('vendor/autoload.php');
 require_once('classes/Game.class.php');
+require_once("routes.php");
 
 $games = array();
 
@@ -17,13 +18,17 @@ function parseURI($request){
 
 $app = function ($request, $response) {
 
+	global $games;
 	$uri = parseURI($request);
 
-	var_dump($uri);
-	var_dump("route"->_$uri[0]);
-	if (!empty($uri[0]) && function_exists("route_" + $uri[0]))
-		call_user_func("route_" + $uri[0], $response);
+	if (function_exists("route_" . $uri[0])){
+		echo "route_" . $uri[0] . " found\n";
+		call_user_func_array("route_" . $uri[0], array($response, &$games));
+	}
+	else 
+		echo "route_" . $uri[0] . " not found\n";
 
+	print_r($games);
 };
 
 $loop = React\EventLoop\Factory::create();
@@ -37,6 +42,4 @@ $socket->listen(1337);
 $loop->run();
 
 // API calls
-
-require_once("routes.php");
 
