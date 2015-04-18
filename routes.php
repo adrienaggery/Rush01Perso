@@ -1,6 +1,7 @@
 <?php
 
-function route_creategame($response, &$games){
+function route_creategame($response, &$games, $uri){
+	
 	$game = new Game(count($games));
 
 	$games[] = $game;
@@ -16,7 +17,7 @@ function route_creategame($response, &$games){
 	$response->end($json);
 }
 
-function route_getopenedgames($response, &$games){
+function route_getopenedgames($response, &$games, $uri){
 
 	$openenedgames = array();
 
@@ -30,5 +31,25 @@ function route_getopenedgames($response, &$games){
 	$headers = array('Content-Type' => 'application/json');
 	$response->writeHead(200, $headers);
 	$response->end($json);
+}
 
+function route_joingame($response, &$games, $uri){
+
+	print_r($uri);
+
+	foreach($games as $game){
+		if ($game->getID() == $uri[1] && $game->isOpened()){
+			echo "Joined  a game\n";
+			//$game->addPlayer($uri[2]);
+			$json = json_encode(array('status' => '0'));
+			break;
+		}
+	}
+
+	if (empty($json))
+		$json = json_encode(array('status' => '1'));
+
+	$headers = array('Content-Type' => 'application/json');
+	$response->writeHead(200, $headers);
+	$response->end($json);
 }

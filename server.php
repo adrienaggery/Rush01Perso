@@ -23,12 +23,12 @@ $app = function ($request, $response) {
 
 	if (function_exists("route_" . $uri[0])){
 		echo "route_" . $uri[0] . " found\n";
-		call_user_func_array("route_" . $uri[0], array($response, &$games));
+		call_user_func_array("route_" . $uri[0], array($response, &$games, $uri));
 	}
 	else 
 		echo "route_" . $uri[0] . " not found\n";
 
-	print_r($games);
+	//print_r($games);
 };
 
 $loop = React\EventLoop\Factory::create();
@@ -40,6 +40,3 @@ echo "Server running at http://127.0.0.1:1337\n";
 
 $socket->listen(1337);
 $loop->run();
-
-// API calls
-

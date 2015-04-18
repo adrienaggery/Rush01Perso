@@ -10,7 +10,7 @@ class Game {
 	public function getID(){ return $this->_id; }
 
 	public function getPlayers() { return $this->_players; }
-	public function addPlayer( $playerName ) { $this->_players[count($this->getPlayers())] = new Player($playerName); }
+	public function addPlayer( $playerName ) { $this->_players[] = new Player($playerName); }
 	public function getPlayerCount() { return count($this->getPlayers()); }
 
 	public function getCurrentTurn() { return $this->_turn % $this->getPlayerCount(); }
