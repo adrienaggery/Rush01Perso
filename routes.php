@@ -87,12 +87,12 @@ function route_startgame($response, &$games, $uri){
 	$response->end($json);
 }
 
-function route_turn($response, &$games, $uri){
+/*function route_turn($response, &$games, $uri){
 
 	foreach($games as $game)
 		if($game->getID() == $uri[1])
 			if($game->)
-}
+}*/
 
 function route_faviconico(){
 
