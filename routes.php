@@ -26,7 +26,7 @@ function route_getopenedgames($response, &$games, $uri){
 			$openedgames[] = $game->getID();
 	}
 
-	$json = json_encode($openedgames, JSON_FORCE_OBJECT);
+	$json = json_encode($openedgames);
 
 	$headers = array('Content-Type' => 'application/json', 'Access-Control-Allow-Origin' => '*');
 	$response->writeHead(200, $headers);
