@@ -28,7 +28,7 @@ function route_getopenedgames($response, &$games, $uri){
 
 	$json = json_encode($openedgames);
 
-	$headers = array('Content-Type' => 'application/json');
+	$headers = array('Content-Type' => 'application/json', 'Access-Control-Allow-Origin' => '*');
 	$response->writeHead(200, $headers);
 	$response->end($json);
 }
@@ -37,6 +37,7 @@ function route_getgameinfo($response, &$games, $uri){
 
 	foreach($games as $game)
 		if ($game->getID() == $uri[1]){
+			var_dump($game->getPlayers());
 			$json = json_encode(array(
 				'id' => $game->getID(),
 				'name' => $game->getName(),
@@ -66,6 +67,20 @@ function route_joingame($response, &$games, $uri){
 
 	if (empty($json))
 		$json = json_encode(array('status' => '1'));
+
+	$headers = array('Content-Type' => 'application/json');
+	$response->writeHead(200, $headers);
+	$response->end($json);
+}
+
+function route_startgame($response, &$games, $uri){
+
+	foreach($games as $game){
+		if ($game->getID() == $uri[1])
+			$error = $game->startGame();
+	}
+
+	$json = json_encode(array('status' => $error));
 
 	$headers = array('Content-Type' => 'application/json');
 	$response->writeHead(200, $headers);

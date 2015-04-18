@@ -27,16 +27,26 @@ class Game {
 	}
 	public function nextTurn() { $this->_turn++; }
 
-		public function isOpened(){
-			if ($this->_started === 0 && $this->getPlayerCount() < 4)
-				return true;
-			else 
-				return false;
-		}
+	public function isOpened(){
+		if ($this->_started === 0 && $this->getPlayerCount() < 4)
+			return true;
+		else 
+			return false;
+	}
 
 	public function __construct($id, $name) {
 		$this->_id = $id;
 		$this->_name = $name;
+	}
+
+	public function startGame(){
+		if ($this->getPlayerCount() >= 2 && $this->getPlayerCount() <= 4){
+			$this->_started = 1;
+			return false;
+		}
+		else 
+			return true;
+		// other things
 	}
 }
 
