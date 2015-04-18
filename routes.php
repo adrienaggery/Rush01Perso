@@ -12,7 +12,7 @@ function route_creategame($response, &$games, $uri){
 
 	// Response generation
 	
-	$headers = array('Content-Type' => 'application/json');
+	$headers = array('Content-Type' => 'application/json', 'Access-Control-Allow-Origin' => '*');
 	$response->writeHead(200, $headers);
 	$response->end($json);
 }
@@ -49,7 +49,7 @@ function route_getgameinfo($response, &$games, $uri){
 	if(empty($json))
 		$json = json_encode(array('id' => -1));
 
-	$headers = array('Content-Type' => 'application/json');
+	$headers = array('Content-Type' => 'application/json', 'Access-Control-Allow-Origin' => '*');
 	$response->writeHead(200, $headers);
 	$response->end($json);
 }
@@ -68,7 +68,7 @@ function route_joingame($response, &$games, $uri){
 	if (empty($json))
 		$json = json_encode(array('status' => '1'));
 
-	$headers = array('Content-Type' => 'application/json');
+	$headers = array('Content-Type' => 'application/json', 'Access-Control-Allow-Origin' => '*');
 	$response->writeHead(200, $headers);
 	$response->end($json);
 }
@@ -82,7 +82,7 @@ function route_startgame($response, &$games, $uri){
 
 	$json = json_encode(array('status' => $error));
 
-	$headers = array('Content-Type' => 'application/json');
+	$headers = array('Content-Type' => 'application/json', 'Access-Control-Allow-Origin' => '*');
 	$response->writeHead(200, $headers);
 	$response->end($json);
 }
