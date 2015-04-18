@@ -5,6 +5,7 @@ class Game {
 	private $_id;
 	private $_players;
 	private $_turn = 0;
+	private $_started = 0;
 
 	public function getID(){ return $this->_id; }
 
@@ -20,6 +21,13 @@ class Game {
 			return false;
 	}
 	public function nextTurn() { $this->_turn++; }
+
+	public function isOpened(){
+		if ($this->_started === 0 && $this->getPlayerCount() < 4)
+			return true;
+		else 
+			return false;
+	}
 
 		public function __construct($id) {
 			$this->_id = $id;
