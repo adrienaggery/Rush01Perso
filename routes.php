@@ -35,12 +35,10 @@ function route_getopenedgames($response, &$games, $uri){
 
 function route_joingame($response, &$games, $uri){
 
-	print_r($uri);
-
 	foreach($games as $game){
 		if ($game->getID() == $uri[1] && $game->isOpened()){
 			echo "Joined  a game\n";
-			//$game->addPlayer($uri[2]);
+			$game->addPlayer($game->getPlayerCount(), $uri[2]);
 			$json = json_encode(array('status' => '0'));
 			break;
 		}
@@ -52,4 +50,8 @@ function route_joingame($response, &$games, $uri){
 	$headers = array('Content-Type' => 'application/json');
 	$response->writeHead(200, $headers);
 	$response->end($json);
+}
+
+function route_faviconico(){
+
 }

@@ -1,5 +1,7 @@
 <?php
 
+require_once("Player.class.php");
+
 class Game {
 
 	private $_id;
@@ -10,7 +12,7 @@ class Game {
 	public function getID(){ return $this->_id; }
 
 	public function getPlayers() { return $this->_players; }
-	public function addPlayer( $playerName ) { $this->_players[] = new Player($playerName); }
+	public function addPlayer( $pid, $playerName ) { $this->_players[] = new Player($pid, $playerName); }
 	public function getPlayerCount() { return count($this->getPlayers()); }
 
 	public function getCurrentTurn() { return $this->_turn % $this->getPlayerCount(); }
@@ -31,7 +33,6 @@ class Game {
 
 		public function __construct($id) {
 			$this->_id = $id;
-			//echo "New game created\n"; 
 		}
 }
 

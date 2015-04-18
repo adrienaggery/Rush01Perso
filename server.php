@@ -13,7 +13,9 @@ function parseURI($request){
 
 	$uri = trim($uristring, "/ \t\n\r\0\x0B");
 
-	return explode('/', $uri);
+	$exploded = explode('/', $uri);
+	$exploded[0] = str_replace('.', '', $exploded[0]);
+	return $exploded;
 }
 
 $app = function ($request, $response) {
@@ -22,11 +24,11 @@ $app = function ($request, $response) {
 	$uri = parseURI($request);
 
 	if (function_exists("route_" . $uri[0])){
-		echo "route_" . $uri[0] . " found\n";
+		echo " [route_" . $uri[0] . " found]\n";
 		call_user_func_array("route_" . $uri[0], array($response, &$games, $uri));
 	}
 	else 
-		echo "route_" . $uri[0] . " not found\n";
+		echo " [route_" . $uri[0] . " not found]\n";
 
 	//print_r($games);
 };
