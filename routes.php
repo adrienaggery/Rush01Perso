@@ -17,7 +17,7 @@ function route_creategame($response, &$games, $uri){
 	$response->end($json);
 }
 
-function route_getopenedgames($response, &$games, $uri){
+function route_getopenedgamens($response, &$games, $uri){
 
 	$openenedgames = array();
 
@@ -58,15 +58,12 @@ function route_joingame($response, &$games, $uri){
 
 	foreach($games as $game){
 		if ($game->getID() == $uri[1] && $game->isOpened()){
-			echo "Joined  a game\n";
-			$game->addPlayer($uri[2]);
-			$json = json_encode(array('status' => '0'));
+			echo "Joined a game\n";
+			$error = $game->addPlayer($uri[2]);
+			$json = json_encode(array('status' => $error));
 			break;
 		}
 	}
-
-	if (empty($json))
-		$json = json_encode(array('status' => '1'));
 
 	$headers = array('Content-Type' => 'application/json', 'Access-Control-Allow-Origin' => '*');
 	$response->writeHead(200, $headers);
@@ -87,12 +84,21 @@ function route_startgame($response, &$games, $uri){
 	$response->end($json);
 }
 
-/*function route_turn($response, &$games, $uri){
+function route_turn($response, &$games, $uri){
 
 	foreach($games as $game)
-		if($game->getID() == $uri[1])
-			if($game->)
-}*/
+		if($game->getID() == $uri[1]){
+			$error = $game->isPlayerTurn($uri[2]);
+			break;
+		}
+
+	$json = json_encode(array('status' => $error));
+
+	$headers = array('Content-Type' => 'application/json', 'Access-Control-Allow-Origin' => '*');
+	$response->writeHead(200, $headers);
+	$response->end($json);
+
+}
 
 function route_faviconico(){
 
