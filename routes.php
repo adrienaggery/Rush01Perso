@@ -17,7 +17,7 @@ function route_creategame($response, &$games, $uri){
 	$response->end($json);
 }
 
-function route_getopenedgamens($response, &$games, $uri){
+function route_getopenedgames($response, &$games, $uri){
 
 	$openenedgames = array();
 

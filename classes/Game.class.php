@@ -1,8 +1,8 @@
 <?php
 
 require_once("Player.class.php");
-require_once("Faction.class.php");
-require_once("Ship.class.php");
+//require_once("Faction.class.php");
+//require_once("Ship.class.php");
 
 class Game {
 
@@ -44,7 +44,7 @@ class Game {
 	}
 	public function nextTurn() { $this->_turn++; }
 
-	public function isOpened(){
+		public function isOpened(){
 		if ($this->_started == false && $this->getPlayerCount() < 4)
 			return true;
 		else 
