@@ -1,7 +1,7 @@
 <?php
 
-require 'vendor/autoload.php';
-require 'classes/Game.class.php';
+require_once('vendor/autoload.php');
+require_once('classes/Game.class.php');
 
 $games = array();
 
@@ -19,8 +19,10 @@ $app = function ($request, $response) {
 
 	$uri = parseURI($request);
 
-	if (!empty($uri[0]))
-		call_user_func($uri[0]);
+	var_dump($uri);
+	var_dump("route"->_$uri[0]);
+	if (!empty($uri[0]) && function_exists("route_" + $uri[0]))
+		call_user_func("route_" + $uri[0], $response);
 
 };
 
@@ -34,13 +36,7 @@ echo "Server running at http://127.0.0.1:1337\n";
 $socket->listen(1337);
 $loop->run();
 
-// Accessors
-
-function getGamesCount() { return count($games); }
-
 // API calls
 
-function creategame(){
-	$games[] = new Game();
-}
+require_once("routes.php");
 
