@@ -26,7 +26,7 @@ function route_getopenedgames($response, &$games, $uri){
 			$openedgames[] = $game->getID();
 	}
 
-	$json = json_encode($openedgames);
+	$json = json_encode($openedgames, JSON_FORCE_OBJECT);
 
 	$headers = array('Content-Type' => 'application/json', 'Access-Control-Allow-Origin' => '*');
 	$response->writeHead(200, $headers);
@@ -85,6 +85,13 @@ function route_startgame($response, &$games, $uri){
 	$headers = array('Content-Type' => 'application/json', 'Access-Control-Allow-Origin' => '*');
 	$response->writeHead(200, $headers);
 	$response->end($json);
+}
+
+function route_turn($response, &$games, $uri){
+
+	foreach($games as $game)
+		if($game->getID() == $uri[1])
+			if($game->)
 }
 
 function route_faviconico(){
