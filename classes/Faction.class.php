@@ -2,7 +2,9 @@
 
 abstract class Faction {
 
-	private $_shipsSet = array("");
+	public function getShipSet(){
+		return static::$shipSet;
+	};
 
 }
 

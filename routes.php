@@ -53,6 +53,25 @@ function route_getgameinfo($response, &$games, $uri){
 	$response->end($json);
 }
 
+function route_getlobbyinfo($response, &$games, $uri){
+	foreach($games as $game)
+		if ($game->getID() == $uri[1]){
+			$json = json_encode(array(
+				'gameid' => $game->getID(),
+				'gamename' => $game->getName(),
+				'playercount' => $game->getPlayerCount(),
+				'players' => $game->getPlayerPseudos()));
+			break;
+		}
+
+	if (empty($json))
+		$json = json_encode(array('gameid' => -1));
+
+	$headers = array('Content-Type' => 'application/json', 'Access-Control-Allow-Origin' => '*');
+	$response->writeHead(200, $headers);
+	$response->end($json);
+}
+
 function route_joingame($response, &$games, $uri){
 
 	foreach($games as $game){

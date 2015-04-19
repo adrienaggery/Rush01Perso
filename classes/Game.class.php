@@ -34,6 +34,12 @@ class Game {
 				return null;
 		}
 	}
+	public function getPlayerPseudos(){
+		foreach($this->getPlayers() as $player)
+			$array[] = $player->getPseudo();
+
+		return $array;
+	}
 
 	public function getCurrentTurn() { return $this->_turn % $this->getPlayerCount(); }
 	public function isPlayerTurn( $pseudo ) {
@@ -79,7 +85,7 @@ class Game {
 
 	private assignShipsByFaction(){
 		foreach($this->getPlayers() as $player){
-			$player->setShips( $player->getFaction()->getShipsSet() );
+			$player->setShips( $player->getFaction()->getShipSet() );
 		}
 	}
 
