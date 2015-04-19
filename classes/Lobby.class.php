@@ -47,7 +47,7 @@ class Lobby implements MessageComponentInterface {
 
 	private function getGameByID($id){
 		foreach($this->_games as $game){
-			if ($game->getID() === $id)
+			if ($game->getID() == $id)
 				return ($game);
 		}
 		return (null);
@@ -82,6 +82,7 @@ class Lobby implements MessageComponentInterface {
 	}
 
 	private function joinGame($gameid, $pseudo){
+		echo "joining game " . $gameid . " " . $pseudo . "\n";
 		$game = $this->getGameByID($gameid);
 		$game->addPlayer($pseudo);
 		echo " -> Player \"" . $pseudo . "\"] joined Game [ID:" . $gameid . "]\n";
