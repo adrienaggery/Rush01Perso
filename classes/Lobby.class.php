@@ -44,7 +44,7 @@ class Lobby implements MessageComponentInterface {
 	// Custom methods
 	private function createGame($gamename){
 		$game = new Game($gamename);
-		$gaes[] = $game;
+		$this->_games[] = $game;
 		$broadcast = json_encode(array(
 			'msg' => 101,
 			'msg-data' => array(
