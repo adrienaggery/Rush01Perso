@@ -60,7 +60,7 @@ class Lobby implements MessageComponentInterface {
 	private function sendAllAvailableGames(ConnectionInterface $conn){
 		foreach($this->_games as $game){
 			$broadcast = json_encode(array(
-				'msg' => 101
+				'msg' => 101,
 				'msgdata' => array(
 					'gameid' => $game->getID(),
 					'gamename' => $game->getName(),
