@@ -23,12 +23,10 @@ class Lobby implements MessageComponentInterface {
 	}
 
 	public function onMessage(ConnectionInterface $from, $msg) {
-		echo " -> Message received\n";
 		$data = json_decode($msg, true);
-		var_dump($data);
 		switch ($data["msg"]){
 		case 201:
-			$this->createGame($data["msg-data"]["gamename"]);
+			$this->createGame($data["msgdata"]["gamename"]);
 			break;
 		}
 	}
@@ -47,7 +45,7 @@ class Lobby implements MessageComponentInterface {
 		$this->_games[] = $game;
 		$broadcast = json_encode(array(
 			'msg' => 101,
-			'msg-data' => array(
+			'msgdata' => array(
 				'gameid' => $game->getID(),
 				'gamename' => $game->getName(),
 				'playercount' => $game->getPlayerCount())));
