@@ -6,6 +6,8 @@ require_once("Ship.class.php");
 
 class Game {
 
+	private static $_globalID = 0;
+
 	private $_id;
 	private $_name;
 	private $_players;
@@ -57,9 +59,10 @@ class Game {
 			return false;
 	}
 
-	public function __construct($id, $name) {
-		$this->_id = $id;
-		$this->_name = $name;
+	public function __construct($gamename) {
+		$this->_id = self::$_globalID;
+		self::$_globalID++;
+		$this->_name = $gamename;
 	}
 
 	public function startGame($jsonfactions){
