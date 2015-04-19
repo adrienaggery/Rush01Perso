@@ -1,44 +1,15 @@
 <?php
 
-require_once('vendor/autoload.php');
-require_once('classes/Game.class.php');
-require_once("routes.php");
+use Ratchet\Server\IoServer;
+use Rush01\Lobby;
 
-$games = array();
+require 'vendor/autoload.php';
+require_once('classes/Lobby.class.php');
 
-function parseURI($request){
-	$requestarray = (array)$request;
-	$requestarraykeys = array_keys($requestarray);
-	$uristring = $requestarray[$requestarraykeys[2]];
+$server = IoServer::factory(new Lobby(), 1337);
 
-	$uri = trim($uristring, "/ \t\n\r\0\x0B");
+echo "Lobby server running on localhost:1337\n";
 
-	$exploded = explode('/', $uri);
-	$exploded[0] = str_replace('.', '', $exploded[0]);
-	return $exploded;
-}
+$server->run();
 
-$app = function ($request, $response) {
-
-	global $games;
-	$uri = parseURI($request);
-
-	if (function_exists("route_" . $uri[0])){
-		echo "  ---> route_" . $uri[0] . " found <---\n";
-		call_user_func_array("route_" . $uri[0], array($response, &$games, $uri));
-	}
-	else 
-		echo " ---X route_" . $uri[0] . " not found X---\n";
-
-	//print_r($games);
-};
-
-$loop = React\EventLoop\Factory::create();
-$socket = new React\Socket\Server($loop);
-$http = new React\Http\Server($socket, $loop);
-
-$http->on('request', $app);
-echo "Server running at http://127.0.0.1:1337\n";
-
-$socket->listen(1337);
-$loop->run();
+?>
