@@ -19,6 +19,7 @@ class Lobby implements MessageComponentInterface {
 
 	public function onOpen(ConnectionInterface $conn) {
 		$this->_clients->attach($conn);
+		sendAllAvailableGames($conn);
 		echo " -> [ID:" . $conn->resourceId . "] has joined Lobby server\n";
 	}
 
@@ -54,5 +55,21 @@ class Lobby implements MessageComponentInterface {
 			$client->send($broadcast);
 
 		echo " -> Game \"" . $game->getName() . "\" has been created\n";
+	}
+
+	private function sendAllAvailableGames(ConnectionInterface $conn){
+		foreach($this->_games as $game){
+			$broadcast = json_encode(array(
+				'msg' => 101
+				'msgdata' => array(
+					'gameid' => $game->getID(),
+					'gamename' => $game->getName(),
+					'playercount' => $game->getPlayerCount())));
+			$conn->send($broadcast);
+		}
+	}
+
+	private function joinGame(){
+		return;
 	}
 }
