@@ -69,7 +69,7 @@ class Lobby implements MessageComponentInterface {
 		}
 	}
 
-	private function joinGame(){
+	/*private function joinGame(){
 		return;
-	}
+	}*/
 }
