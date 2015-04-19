@@ -2,6 +2,8 @@
 
 namespace Rush01;
 
+use Rush01\Player;
+
 require_once("Player.class.php");
 require_once("Faction.class.php");
 require_once("Ship.class.php");

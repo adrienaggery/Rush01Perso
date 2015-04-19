@@ -1,5 +1,7 @@
 <?php
 
+namespace Rush01;
+
 class Player {
 
 	private $_id;
