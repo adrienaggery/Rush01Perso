@@ -29,6 +29,9 @@ class Lobby implements MessageComponentInterface {
 		case 201:
 			$this->createGame($data["msgdata"]["gamename"]);
 			break;
+		case 202:
+			$this->joinGame($gameid);
+			break;
 		}
 	}
 
@@ -69,7 +72,9 @@ class Lobby implements MessageComponentInterface {
 		}
 	}
 
-	/*private function joinGame(){
-		return;
-	}*/
+	private function joinGame($gameid, $pseudo){
+		$game = getGameByID($gameid);
+		$game->addPlayer($pseudo);
+		echo " -> Player \"" . $pseudo . "\"] joined Game [ID:" . $gameid . "]\n";
+	}
 }
