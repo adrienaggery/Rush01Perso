@@ -116,7 +116,4 @@
 
 }
 
-require_once('ships/OrktobrRoug.class.php');
-require_once('ships/WrathOFTheRighteous.class.php');
-
 ?>

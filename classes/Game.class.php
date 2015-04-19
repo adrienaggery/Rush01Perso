@@ -73,7 +73,7 @@ class Game {
 			return true;
 	}
 
-	private dispatchFactions($jsonfactions){
+	private function dispatchFactions($jsonfactions){
 		$factions = json_decode($jsonfactions, true);
 
 		foreach($factions as $p => $f){
@@ -83,7 +83,7 @@ class Game {
 		}
 	}
 
-	private assignShipsByFaction(){
+	private function assignShipsByFaction(){
 		foreach($this->getPlayers() as $player){
 			$player->setShips( $player->getFaction()->getShipSet() );
 		}
