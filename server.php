@@ -24,11 +24,11 @@ $app = function ($request, $response) {
 	$uri = parseURI($request);
 
 	if (function_exists("route_" . $uri[0])){
-		echo " [route_" . $uri[0] . " found]\n";
+		echo "  ---> route_" . $uri[0] . " found <---\n";
 		call_user_func_array("route_" . $uri[0], array($response, &$games, $uri));
 	}
 	else 
-		echo " [route_" . $uri[0] . " not found]\n";
+		echo " ---X route_" . $uri[0] . " not found X---\n";
 
 	//print_r($games);
 };

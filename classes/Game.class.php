@@ -1,8 +1,8 @@
 <?php
 
 require_once("Player.class.php");
-//require_once("Faction.class.php");
-//require_once("Ship.class.php");
+require_once("Faction.class.php");
+require_once("Ship.class.php");
 
 class Game {
 
@@ -56,13 +56,31 @@ class Game {
 		$this->_name = $name;
 	}
 
-	public function startGame(){
+	public function startGame($jsonfactions){
+		$this->dispatchFactions($jsonfactions);
+		$this->assignShipsByFaction();
 		if ($this->getPlayerCount() >= 2 && $this->getPlayerCount() <= 4){
 			$this->_started = true;
 			return false;
 		}
 		else 
 			return true;
+	}
+
+	private dispatchFactions($jsonfactions){
+		$factions = json_decode($jsonfactions, true);
+
+		foreach($factions as $p => $f){
+			$fclass = "Class" . $f;
+			$player = $this->getPlayers[$this->getPlayerID($p)];
+			$player->setFaction(new $fclass());
+		}
+	}
+
+	private assignShipsByFaction(){
+		foreach($this->getPlayers() as $player){
+			$player->setShips( $player->getFaction()->getShipsSet() );
+		}
 	}
 
 	// Map drawing and calls
