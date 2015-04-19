@@ -4,10 +4,6 @@ namespace Rush01;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 
-use Rush01\Game;
-
-require_once("Game.class.php");
-
 class Lobby implements MessageComponentInterface {
 
 	protected $_clients;
