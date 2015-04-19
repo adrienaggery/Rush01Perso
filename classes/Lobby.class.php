@@ -20,7 +20,7 @@ class Lobby implements MessageComponentInterface {
 
 	public function onMessage(ConnectionInterface $from, $msg) {
 		echo " -> Message received\n";
-		$data = json_decode($msg);
+		$data = json_decode($msg, true);
 		var_dump($data);
 		switch ($data["msg"]){
 		case 201:
