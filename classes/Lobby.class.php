@@ -70,15 +70,16 @@ class Lobby implements MessageComponentInterface {
 	}
 
 	private function sendAllAvailableGames(ConnectionInterface $conn){
-		foreach($this->_games as $game){
-			$broadcast = json_encode(array(
-				'msg' => 101,
-				'msgdata' => array(
-					'gameid' => $game->getID(),
-					'gamename' => $game->getName(),
-					'playercount' => $game->getPlayerCount())));
-			$conn->send($broadcast);
-		}
+		foreach($this->_games as $game)
+			if ($game->isOpened()){
+				$broadcast = json_encode(array(
+					'msg' => 101,
+					'msgdata' => array(
+						'gameid' => $game->getID(),
+						'gamename' => $game->getName(),
+						'playercount' => $game->getPlayerCount())));
+				$conn->send($broadcast);
+			}
 	}
 
 	private function joinGame($gameid, $pseudo){
