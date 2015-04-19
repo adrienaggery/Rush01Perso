@@ -63,6 +63,7 @@ class Game {
 	}
 
 	public function startGame($jsonfactions){
+		var_dump($jsonfactions);
 		$this->dispatchFactions($jsonfactions);
 		$this->assignShipsByFaction();
 		if ($this->getPlayerCount() >= 2 && $this->getPlayerCount() <= 4){
@@ -75,11 +76,10 @@ class Game {
 
 	private function dispatchFactions($jsonfactions){
 		$factions = json_decode($jsonfactions, true);
-
+		var_dump($factions);
 		foreach($factions as $p => $f){
-			$fclass = "Class" . $f;
-			$player = $this->getPlayers[$this->getPlayerID($p)];
-			$player->setFaction(new $fclass());
+			$player = $this->getPlayers()[$this->getPlayerID($p)];
+			$player->setFaction(new $f());
 		}
 	}
 

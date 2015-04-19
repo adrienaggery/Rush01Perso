@@ -94,7 +94,7 @@ function route_startgame($response, &$games, $uri){
 
 	foreach($games as $game){
 		if ($game->getID() == $uri[1]){
-			$error = $game->startGame();
+			$error = $game->startGame(urldecode($uri[2]));
 			break;
 		}
 	}
