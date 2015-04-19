@@ -30,7 +30,7 @@ class Lobby implements MessageComponentInterface {
 			$this->createGame($data["msgdata"]["gamename"]);
 			break;
 		case 202:
-			$this->joinGame($gameid);
+			$this->joinGame($data["msgdata"]["gameid"], $data["msgdata"]["pseudo"]);
 			break;
 		}
 	}
@@ -44,6 +44,15 @@ class Lobby implements MessageComponentInterface {
 	}
 
 	// Custom methods
+
+	private function getGameByID($id){
+		foreach($this->_games as $game){
+			if ($game->getID() === $id)
+				return ($game);
+		}
+		return (null);
+	}
+
 	private function createGame($gamename){
 		$game = new Game($gamename);
 		$this->_games[] = $game;
