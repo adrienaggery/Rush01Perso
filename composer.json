@@ -1,6 +1,5 @@
 {
     "require": {
-        "cboden/ratchet": "0.3.*",
-        "guzzle/guzzle": "~3.9"
+        "cboden/ratchet": "0.3.*"
     }
 }
