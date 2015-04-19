@@ -82,7 +82,7 @@ function route_joingame($response, &$games, $uri){
 		}
 	}
 
-	if(!$error)
+	if($error != -1 && !empty($json))
 		echo $uri[2] . " joined game: " . $game->getName() . " with ID: " . $game->getID() . "\n";
 
 	$headers = array('Content-Type' => 'application/json', 'Access-Control-Allow-Origin' => '*');
@@ -115,6 +115,19 @@ function route_turn($response, &$games, $uri){
 		}
 
 	$json = json_encode(array('status' => $error));
+
+	$headers = array('Content-Type' => 'application/json', 'Access-Control-Allow-Origin' => '*');
+	$response->writeHead(200, $headers);
+	$response->end($json);
+}
+
+function route_getshipspos($response, &$games, $uri){
+
+	foreach($games as $game)
+		if($game->getID() == $uri[1]){
+			$json = $game->getShipsPos();
+			break;
+		}
 
 	$headers = array('Content-Type' => 'application/json', 'Access-Control-Allow-Origin' => '*');
 	$response->writeHead(200, $headers);

@@ -20,10 +20,10 @@ class Game {
 	public function addPlayer( $playerName ) {
 		if ($this->isOpened()){
 			$this->_players[] = new Player($this->getPlayerCount(), $playerName); 
-			return 0;
+			return $this->getID();
 		}
 		else
-			return 1;
+			return -1;
 	}
 	public function getPlayerCount() { return count($this->getPlayers()); }
 	public function getPlayerID($pseudo){
@@ -90,7 +90,19 @@ class Game {
 	}
 
 	// Map drawing and calls
-	
+	public function getShipsPos(){
+		if(!$this->_started){
+			foreach($this->getPlayers() as $player)
+				foreach($player->getShips() as $ship)
+					$ships[] = array(
+						'ownerPseudo' => $player->getPseudo(),
+						'shipType' => $ship->get_class(),
+						'shipPosition' => $ship->getPosition());
+			return $ships;
+		}
+		else
+			return null;
+	}
 }
 
 ?>
