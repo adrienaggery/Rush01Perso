@@ -19,7 +19,7 @@ class Lobby implements MessageComponentInterface {
 
 	public function onOpen(ConnectionInterface $conn) {
 		$this->_clients->attach($conn);
-		sendAllAvailableGames($conn);
+		$this->sendAllAvailableGames($conn);
 		echo " -> [ID:" . $conn->resourceId . "] has joined Lobby server\n";
 	}
 
