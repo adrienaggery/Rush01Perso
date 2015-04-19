@@ -82,7 +82,7 @@ class Lobby implements MessageComponentInterface {
 	}
 
 	private function joinGame($gameid, $pseudo){
-		$game = $this->$this->$this->$this->getGameByID($gameid);
+		$game = $this->getGameByID($gameid);
 		$game->addPlayer($pseudo);
 		echo " -> Player \"" . $pseudo . "\"] joined Game [ID:" . $gameid . "]\n";
 	}
